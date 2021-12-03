@@ -1,14 +1,26 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class TriggerSystem : MonoBehaviour
 {
-    private void OnCollisionEnter(Collision collision)
+    private TimeSystem timeSystem;
+    public Text WinEndText;
+    public Animator TextAnimator;
+    private void Start()
     {
-        if (collision.collider.tag == "EscapeLadder")
+        timeSystem = GetComponent<TimeSystem>();
+    }
+    private void OnTriggerEnter(Collider other)
+    {
+        if (gameObject.tag == "EscapeLadder")
         {
-            Debug.Log("Вы сбежали!");
+            WinEndText.text = "Вы сбежали";
+            TextAnimator.Play("WinEndAnimTextAnim");
+            Debug.Log("Вы сбежали");
+            timeSystem.StopCoroutine("SecondsChange");
         }
+        
     }
 }
