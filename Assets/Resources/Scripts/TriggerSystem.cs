@@ -2,25 +2,34 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class TriggerSystem : MonoBehaviour
 {
-    private TimeSystem timeSystem;
     public Text WinEndText;
     public Animator TextAnimator;
-    private void Start()
-    {
-        timeSystem = GetComponent<TimeSystem>();
-    }
+    public TimeSystem timeSystem;
     private void OnTriggerEnter(Collider other)
     {
         if (gameObject.tag == "EscapeLadder")
         {
             WinEndText.text = "ֲû סבוזאכט";
-            TextAnimator.Play("WinEndAnimTextAnim");
-            Debug.Log("ֲû סבוזאכט");
-            timeSystem.StopCoroutine("SecondsChange");
+            TextAnimator.Play("WinEndTextAnim");
+            timeSystem.StopTimer();
+            StartCoroutine(ReturnToStartScreen());
+            
         }
-        
+        if (gameObject.tag == "Fire")
+        {
+            WinEndText.text = "ַגמםטעו ג לקס";
+            TextAnimator.Play("WinEndTextAnim");
+            timeSystem.StopTimer();
+            ReturnToStartScreen();
+        }
+    }
+    private IEnumerator ReturnToStartScreen()
+    {
+        yield return new WaitForSeconds(2);
+        SceneManager.LoadScene("MainMenu");
     }
 }
