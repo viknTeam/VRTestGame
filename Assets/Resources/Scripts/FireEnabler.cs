@@ -5,10 +5,14 @@ using UnityEngine;
 public class FireEnabler : MonoBehaviour
 {
     public ParticleSystem ParticleSystem;
+    public GameObject FireCollider;
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Player")
-        ParticleSystem.gameObject.SetActive(true);
+        {
+            FireCollider.SetActive(true);
+            ParticleSystem.Play();
+        }
     }
 }

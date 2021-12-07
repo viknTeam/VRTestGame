@@ -17,7 +17,6 @@ public class TriggerSystem : MonoBehaviour
             TextAnimator.Play("WinEndTextAnim");
             timeSystem.StopTimer();
             StartCoroutine(ReturnToStartScreen());
-            
         }
         if (gameObject.tag == "Fire")
         {
@@ -27,7 +26,7 @@ public class TriggerSystem : MonoBehaviour
             ReturnToStartScreen();
         }
     }
-    private IEnumerator ReturnToStartScreen()
+    public IEnumerator ReturnToStartScreen()
     {
         yield return new WaitForSeconds(2);
         SceneManager.LoadScene("MainMenu");
