@@ -9,8 +9,14 @@ public class FireDeathScript : MonoBehaviour
     public Text WinEndText;
     public Animator TextAnimator;
     public TimeSystem timeSystem;
-    public GameObject TeleportingSystem;
+    private GameObject TeleportingSystem;
+    private TriggerSystem triggerSystem;
 
+    private void Start()
+    {
+        TeleportingSystem = GameObject.FindGameObjectWithTag("TeleportSystem");
+        triggerSystem = GameObject.FindGameObjectWithTag("EscapeLadder").GetComponent<TriggerSystem>();
+    }
     private void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Player")
@@ -19,7 +25,7 @@ public class FireDeathScript : MonoBehaviour
             WinEndText.text = "Вы сгорели";
             TextAnimator.Play("WinEndTextAnim");
             timeSystem.StopTimer();
-            StartCoroutine(GetComponent<TriggerSystem>().ReturnToStartScreen());
+            StartCoroutine(triggerSystem.ReturnToStartScreen());
         }
     }
 }

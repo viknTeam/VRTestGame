@@ -18,13 +18,6 @@ public class TriggerSystem : MonoBehaviour
             timeSystem.StopTimer();
             StartCoroutine(ReturnToStartScreen());
         }
-        if (gameObject.tag == "Fire")
-        {
-            WinEndText.text = "ַגמםטעו ג לקס";
-            TextAnimator.Play("WinEndTextAnim");
-            timeSystem.StopTimer();
-            ReturnToStartScreen();
-        }
     }
     public IEnumerator ReturnToStartScreen()
     {
