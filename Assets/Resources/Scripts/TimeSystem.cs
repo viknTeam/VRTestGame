@@ -10,6 +10,7 @@ public class TimeSystem : MonoBehaviour
     public static float SecondsLeft;
 
     public Text SecondsText;
+    public TriggerSystem TriggerSystem;
     private void Start()
     {
         SecondsLeft = SecondsLeftRange;
@@ -18,14 +19,16 @@ public class TimeSystem : MonoBehaviour
     }
     public IEnumerator SecondsChange()
     {
-        while (SecondsLeft > 0)
+        while (SecondsLeft >= 0)
         {
             SecondsLeft -= Time.deltaTime;
             UpdateTimerText();
-            StopCoroutine("SecondsChange");
             yield return null;
         }
-
+        TriggerSystem.WinEndText.text = "Вы сбежали";
+        TriggerSystem.TextAnimator.Play("WinEndTextAnim");
+        StopTimer();
+        TriggerSystem.StartCoroutine("ReturnToStartScreen");
     }
     private void UpdateTimerText()
     {
