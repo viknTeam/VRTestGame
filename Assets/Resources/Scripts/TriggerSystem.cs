@@ -18,6 +18,10 @@ public class TriggerSystem : MonoBehaviour
             timeSystem.StopTimer();
             StartCoroutine(ReturnToStartScreen());
         }
+        if (gameObject.name == "MainMenuCube")
+        {
+            SceneManager.LoadScene("MainMenu");
+        }
     }
     public IEnumerator ReturnToStartScreen()
     {

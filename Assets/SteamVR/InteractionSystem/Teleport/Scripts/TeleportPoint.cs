@@ -224,13 +224,20 @@ namespace Valve.VR.InteractionSystem
 		//-------------------------------------------------
 		public void TeleportToScene()
 		{
-			if ( !string.IsNullOrEmpty( switchToScene ) )
-			{
-				SteamVR_LoadLevel.Begin(switchToScene);
-			}
-			else
-			{
-				Debug.LogError("<b>[SteamVR Interaction]</b> TeleportPoint: Invalid scene name to switch to: " + switchToScene, this);
+            if (gameObject.name == "ExitPoint")
+            {
+				Application.Quit();
+            }
+            else
+            {
+				if (!string.IsNullOrEmpty(switchToScene))
+				{
+					SteamVR_LoadLevel.Begin(switchToScene);
+				}
+				else
+				{
+					Debug.LogError("<b>[SteamVR Interaction]</b> TeleportPoint: Invalid scene name to switch to: " + switchToScene, this);
+				}
 			}
 		}
 
